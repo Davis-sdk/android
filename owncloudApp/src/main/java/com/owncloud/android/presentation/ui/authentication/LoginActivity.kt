@@ -223,7 +223,7 @@ class LoginActivity : AppCompatActivity(), SslUntrustedCertDialog.OnSslUntrusted
 
     private fun initBackgroundImage() =
         //TODO: Change this behaviour for customer branding
-        DisplayUtils.scaleImageInViewFromBottomRight(login_layout.login_background_image)
+        DisplayUtils.scaleImageFromBottomRightOnlyOnNonbrandedApp(this, login_layout.login_background_image)
 
 
     private fun checkOcServer() {

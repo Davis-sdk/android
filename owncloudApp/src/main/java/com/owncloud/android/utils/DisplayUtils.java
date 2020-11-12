@@ -256,6 +256,22 @@ public class DisplayUtils {
         }
     }
 
+    /**
+     * Only Scales image for the original ownCloud app. If this app is a branded version scaling
+     * should be center crop. This was the behaviour for all versions of the ownCloud Android app before
+     * the 2020 CI design was released. In order not to disturb customer builds this method had to be added.
+     * @param context required to find the package name of the current application
+     * @param imageView the image view that should be scaled accordingly
+     */
+    public static void scaleImageFromBottomRightOnlyOnNonbrandedApp(Context context, ImageView imageView) {
+        if(context.getPackageName().equals("com.owncloud.android.debug")
+            || context.getPackageName().equals("com.owncloud.android")) {
+            scaleImageInViewFromBottomRight(imageView);
+        } else {
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+    }
+
     public static void scaleImageInViewFromBottomRight(ImageView imageView) {
         imageView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             Matrix imageMatrix = new Matrix();
